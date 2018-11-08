@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <link rel="stylesheet" href="css/add.css"/>
+  <title>注册界面</title>
+  <style type="text/css">
+	span
+	{
+		font-size:12px;
+		color:gray;
+	}
+  </style>
+ </head>
+ <body>
+	 <div class="header">
+		 <div class="nav">
+			 <a href="#" title="阴阳师官网首页"><img src="foot_2.png" alt=""/></a>
+			 <span class="line"></span>
+			 <span class="text">阴阳师账号注册中心</span>
+		 </div>
+	 </div>
+
+	<div class="body my_table">
+		<div class="d1">
+			<div class="d2">
+				<p>注册</p>
+				<div class="inputbox">用户昵称：<input class="input" type="text" id="uname" name="uname" onblur="getOnfo()" placeholder="请输入网易163账号形式....">
+					<span id="s1"></span>
+				</div>
+				<div class="inputbox">用户密码：<input class="input" type="password" id="upwd" name="upwd" onblur="f0()" placeholder="请输入6-18位密码...">
+					<span id="show_f0"></span>
+				</div>
+				<div class="inputbox">确认密码：<input class="input" type="password" id="c_pwd" name="upwd" onblur="f1()" placeholder="请再次输入密码..."/>
+					<span id="show_f1"></span>
+				</div>
+				<div class="inputbox">真实姓名：<input class="input" type="text" id="user_name" name="user_name"/></div>
+				<div class="inputbox">用户性别：<input type="radio" id="man" name="gender" value="1"/><label for="man">男</label>
+					<input type="radio" id="woman" name="gender" value="0"/><label for="woman">女</label>
+					<input type="radio" id="bm" name="gender" value="2"/><label for="bm">保密</label>
+				</div>
+				<div class="btnbox">
+					<input class="btn" type="button" value="注册" onclick="getAdd()" id="oc" >
+				</div>
+			</div>
+		</div>
+	</div>
+	 <div class="box">
+		 <ul class="list" style="list-style: none">
+			 <li><a href="#">About NetEase</a><span>-</span></li>
+			 <li><a href="#">公司简介</a><span>-</span></li>
+			 <li><a href="#">联系方式</a><span>-</span></li>
+			 <li><a href="#">OAuth2.0认证</a><span>-</span></li>
+			 <li><a href="#">招聘信息</a><span>-</span></li>
+			 <li><a href="#">客户服务</a><span>-</span></li>
+			 <li><a href="#">相关法律</a><span>-</span></li>
+			 <li><a href="#">网络营销</a></li>
+			 <p class="copy" style="clear: both">网易公司版权所有 &copy;1997-2018</p>
+		 </ul>
+	 </div>
+	<script src = "common.js"></script>
+	
+	<script>
+		
+		//验证密码位数
+		function f0(){
+			var upwd = $("upwd").value;
+			//如果密码为空提示不能为空
+			if (upwd == "")
+			{
+				$('show_f0').innerHTML = "密码不能为空";
+				$("oc").disabled = true;
+			}
+			else if(upwd.length<6 || upwd.length>18){
+				$('show_f0').innerHTML="您输入的值小于6位或者大于18位";
+				$("oc").disabled = true;
+			}else
+			{
+				$('show_f0').innerHTML="密码长度符合";
+				$("oc").disabled = true;
+			}
+		}
+		//验证密码相同
+		function f1(){
+			var upwd = $("upwd").value;
+			var c_pwd = $("c_pwd").value;
+			if (upwd == "")
+			{
+				$("show_f1").innerHTML = "请输入密码";
+				$("oc").disabled = true;
+			}
+			else if(upwd == c_pwd)
+			{
+				$("show_f1").innerHTML = "密码相同";
+				$("oc").disabled = false;
+			}
+			else{
+				$("show_f1").innerHTML = "密码不相同";
+				$("oc").disabled = true;
+			}
+				//if ($("show_f1").value = "密码相同" && $("s1").value == "用户名可用")
+			//{
+			//	$("oc").disabled = false;
+			//}
+			
+		}
+		//验证手机号为11位
+		function f2(){
+			var phone=$("phone").value;
+			if(phone==""){
+				$("s2").innerHTML="手机号不能为空";
+				$("oc").disabled = true;
+			}else if(phone.length<11){
+				$('s2').innerHTML="您输入的值小于11位";
+				$("oc").disabled = true;
+			}else
+			{
+				$('s2').innerHTML="手机号符合";
+				$("oc").disabled = false;
+			}
+		}
+//		//验证邮箱账号
+//		function f3(){
+//			var i = $("email").value.indexOf("@");
+//			var j = $("email").value.lastIndexOf("@");
+//			var k = $("email").value.indexOf(".com");
+//			var l = $("email").value.lastIndexOf(".com");
+//			if (i == -1 || i != j || i == 0 || i == $("email").value.length-1)
+//			{
+//				$("show_f3").innerHTML = "邮箱不可用";
+//				$("oc").disabled = true;
+//			}else if (k >= i+7 || k != l ||k != $("email").value.length-4)
+//			{
+//				$("show_f3").innerHTML = "邮箱不可用";
+//				$("oc").disabled = true;
+//			}
+//			else
+//			{
+//				$("show_f3").innerHTML = "邮箱可用";
+//				$("oc").disabled = false;
+//			}
+//		}
+		//验证用户名是否可用
+		function getOnfo(){
+
+			var xhr = createXhr();
+			xhr.onreadystatechange = function (){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					
+					var result = xhr.responseText;
+					if (result == "用户名可用")
+					{
+						$("oc").disabled = false;
+					}else
+					{
+						$("oc").disabled = true;
+					}
+					$("s1").innerHTML = result;
+					
+				}
+			};
+			xhr.open('post','/myPro/check',true);
+			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			var name = $("uname").value;
+			var str = name.match(/(.+)@((163){1})(\.com){1}(.cn)?/i);
+			if(str == null){
+				$("s1").innerHTML = "用户名格式错误";
+				$("oc").disabled = true;
+			}
+			else{
+				xhr.send('uname='+uname);
+			}
+
+		}
+		//增加用户
+		function getAdd(){
+			var xhr = createXhr();
+
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					if(result == "注册成功！"){
+						alert(result);
+						location.href="http://127.0.0.1:3000/index.html";
+					}
+					else{
+						alert("注册失败");
+					}
+				}
+			};
+			xhr.open('post','/myPro/add',true);
+			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			var uname = $("uname").value;
+			var upwd = $("upwd").value;
+			var user_name = $("user_name").value;
+			if ($("man").checked == true)
+			{
+				var gender = $("man").value;
+			}else if ($("woman").checked == true)
+			{
+				var gender = $("woman").value
+			}else if ($("bm").checked == true)
+			{
+				var gender = $("bm").value;
+			}
+			var formdata = "uname="+uname+"&upwd="+upwd+"&user_name="+user_name+"&gender="+gender;
+			//if ($('s1') == "用户名可用")
+			//{
+				
+				xhr.send(formdata);
+			//}
+			
+		}
+		//验证是否需要将按钮设置为不可用
+		/*function but_check(){
+			//if ($("s1") == "用户名已存在")
+			//{
+				$("oc").disabled = true;
+			//}
+			
+		}*/
+	</script>
+ </body>
+</html>

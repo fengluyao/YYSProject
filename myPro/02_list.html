@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+  
+  </style>
+ </head>
+ <body onload="getList()">
+	<table border="1px solid black" align="center">
+		<thead>
+			<tr>
+				<th>用户编号</th>
+				<th>用户昵称</th>
+				<th>用户密码</th>
+				<th>用户邮箱</th>
+				<th>用户手机</th>
+				<th>用户头像</th>
+				<th>真是姓名</th>
+				<th>用户性别</th>
+			</tr>	
+		</thead>
+		<tbody id="t1">
+		
+		</tbody>
+		
+	</table>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	<script src="common.js"></script>
+	<script>
+		function getList(){
+			var xhr = createXhr();
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					var arr = JSON.parse(result);
+					var str = '';
+					for (var i=0;i<=arr.length-1 ;i++ )
+					{
+						var user = arr[i];
+						str += '<tr>';
+						str += '<td>'+user.uid+'</td>'+
+								'<td>'+user.uname+'</td>'+
+								'<td>'+user.upwd+'</td>'+
+								'<td>'+user.email+'</td>'+
+								'<td>'+user.phone+'</td>'+
+								'<td>'+user.avatar+'</td>'+
+								'<td>'+user.user_name+'</td>';
+							var gender = ''
+							if (user.gender == 1)
+							{
+								gender = '男';
+							}else if (user.gender == 0)
+							{
+								gender="女";
+							}else
+							{
+								gender = "不详";
+							}
+						str +=	'<td>'+gender+'</td>';
+						str += '<td><a href="javascript:deleteUser('+user.uid+')" id="delete">删除</a> <a href="04_sel_update.html?uid='+user.uid+'" target="_blank">修改</a></td>';
+						str += '</tr>';
+								/*`
+								<tr>
+									<td>${user.uid}</td>
+									<td>${user.uname}</td>
+									<td>${user.upwd}</td>
+									<td>${user.email}</td>
+									<td>${user.phone}</td>
+									<td>${user.avatar}</td>
+									<td>${user.user_name}</td>
+									<td>${user.gender}</td>
+								</tr>`;*/
+					}
+					$('t1').innerHTML = str;
+				}
+			}
+			xhr.open('get','/myPro/list',true);
+			xhr.send(null);
+		}
+		function deleteUser(uid){
+			var xhr = createXhr();
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					alert(result);
+					getList()
+				}
+			}
+			xhr.open('post','/myPro/deleteUser',true);
+			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			xhr.send("uid="+uid);
+		}
+
+	</script>
+ </body>
+</html>

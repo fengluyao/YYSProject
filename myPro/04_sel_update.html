@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+  
+  </style>
+ </head>
+ <body onload="getInfo()">
+	<h1>修改页面</h1>
+	<!--这里是同步方法<form method="get" action="/myPro/update"></form>-->
+		<p>用户名称：<input type="text" id="uname" name="uname"/></p>
+		<p>用户密码：<input type="text" id="upwd" name="upwd"/></p>
+		<p>用户邮箱：<input type="email" id="email" name="email"/></p>
+		<p>用户手机：<input type="phone" id="phone" name="phone"/></p>
+		<p>真实姓名：<input type="text" id="user_name" name="user_name"/></p>
+		<p>用户性别：
+			<input type="radio" id="man" name="gender" value="1"/><label for="man">男</label>
+			<input type="radio" id="woman" name="gender" value="0"/><label for="woman">女</label>
+		</p>
+		<p><input type="hidden" id="uid" name="uid"/></p>
+		<input type="button" value="修改" onclick="getChange()"/>
+	
+
+	<script src="common.js"></script>
+	<script>
+		/*function getInfo(){
+			//获取URL的参数uid
+			var urlParams = new URLSearchParams(location.search);
+			var uid = urlParams.get('uid');
+			//alert(uid);
+			var xhr = createXhr();
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					var arr = JSON.parse(result);
+					for (var i = 0;i<=arr.length-1 ;i++ )
+					{
+						var user = arr[i];
+						$('uid').value=user.uid;
+						$('uname').value=user.uname;
+						$('upwd').value=user.upwd;
+						$('email').value=user.email;
+						$('phone').value=user.phone;
+						$('user_name').value=user.user_name;
+						if (user.gender == 1)
+						{
+							$('man').checked=true;
+						}else if (user.gender == 0)
+						{
+							$('woman').checked=true;
+						}
+						
+					}
+				}
+			}
+			xhr.open('get','/myPro/search?uid='+uid,true);
+			xhr.send(null);
+		}*/
+		function getInfo(){
+			//获取URL的参数uid
+			var urlParams = new URLSearchParams(location.search);
+			var uid = urlParams.get('uid');
+			//alert(uid);
+			var xhr = createXhr();
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					var arr = JSON.parse(result);
+					for (var i = 0;i<=arr.length-1 ;i++ )
+					{
+						var user = arr[i];
+						$('uid').value=user.uid;
+						$('uname').value=user.uname;
+						$('upwd').value=user.upwd;
+						$('email').value=user.email;
+						$('phone').value=user.phone;
+						$('user_name').value=user.user_name;
+						if (user.gender == 1)
+						{
+							$('man').checked=true;
+						}else if (user.gender == 0)
+						{
+							$('woman').checked=true;
+						}
+						
+					}
+				}
+			}
+			xhr.open('get','/myPro/search?uid='+uid,true);
+			xhr.send(null);
+		}
+		function getChange(){
+			var xhr = createXhr();
+			xhr.onreadystatechange = function (){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					if(result == 1){
+						alert('修改成功');location.href='http://127.0.0.1:3000/02_list.html';
+					}
+					else{
+						alert('修改失败');
+					}
+				}
+			}
+			xhr.open('post','/myPro/change',true);
+			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			var uid = $('uid').value;
+			var uname = $('uname').value;
+			var upwd = $('upwd').value;
+			var email = $('email').value;
+			var phone = $('phone').value;
+			var user_name = $('user_name').value;
+			if ($("man").checked == true)
+			{
+				var gender = $("man").value;
+			}
+			else if($("woman").checked == true)
+			{
+				var gender = $('woman').value;
+			}
+			var formdata = "uid="+uid+"&uname="+uname+"&upwd="+upwd+"&email="+email+"&phone="+phone+"&user_name="+user_name+"&gender="+gender;
+			xhr.send(formdata);
+		}
+	</script>
+ </body>
+</html>

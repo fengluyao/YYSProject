@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>Document</title>
+<link rel="stylesheet" href="css/login.css"/>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div class="header">
+		<div class="nav">
+			<a href="#" title="阴阳师官网首页"><img src="foot_2.png" alt=""/></a>
+			<span class="line"></span>
+			<span class="text">阴阳师登录中心</span>
+		</div>
+	</div>
+	<div class="body my_table">
+		<div class="login">
+			<div class="login_box">
+				<p>登录</p>
+				<div class="inputbox">
+				用户名称：
+					<input class="input" type="text" id="uname" placeholder="请输入用户名...." onblur="search1()"/>
+				</div>
+
+				<div class="inputbox">
+					用户密码：
+					<input class="input" type="password" id="upwd" placeholder="请输入密码...."/>
+				</div>
+				<div class="btnbox">
+					<input id="btn" class="btn" type="button" value="登录" onclick="loginTo()"/>
+				</div>
+				<div>
+					<p class="text1">还没有账号？<span><a href="./03_add.html">注册</a></span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="box">
+			<ul class="list" style="list-style: none">
+				<li><a href="#">About NetEase</a><span>-</span></li>
+				<li><a href="#">公司简介</a><span>-</span></li>
+				<li><a href="#">联系方式</a><span>-</span></li>
+				<li><a href="#">OAuth2.0认证</a><span>-</span></li>
+				<li><a href="#">招聘信息</a><span>-</span></li>
+				<li><a href="#">客户服务</a><span>-</span></li>
+				<li><a href="#">相关法律</a><span>-</span></li>
+				<li><a href="#">网络营销</a></li>
+				<p class="copy" style="clear: both">网易公司版权所有 &copy;1997-2018</p>
+			</ul>
+		</div>
+
+
+
+
+
+
+	<script src="common.js"></script>
+	<script>
+		function search1(){
+			var name = $("uname").value;
+			var str = name.match(/(.+)@((163){1})(\.com){1}(.cn)?/i);
+			if(str == null){
+				$("btn").disabled = true;
+			}
+			else{
+				$("btn").disabled = false;
+			}
+		}
+
+
+
+		function loginTo(){
+			var xhr = createXhr();
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{
+					var result = xhr.responseText;
+					if (result == "登陆成功！")
+					{
+						alert(result);
+						location.href='http://127.0.0.1:3000/index.html';
+					}
+					else{
+						alert(result);
+					}
+				}
+			}
+			xhr.open('post','/myPro/login',true);
+
+			//xhr.setRequestHeader('Content-Type','applicaption/x-www-form-urlencoded');
+			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			var uname = $('uname').value;
+			var upwd = $('upwd').value;
+			var formdata = 'uname='+uname+'&upwd='+upwd;
+			xhr.send(formdata);
+		}
+	</script>
+ </body>
+</html>

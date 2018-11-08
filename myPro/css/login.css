@@ -1,0 +1,129 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image:linear-gradient(to top,#F0E5B7 0%,#DCC97A 100%);
+}
+.header{
+    width:100% ;
+    height : 70px;
+}
+.nav{
+    width:1200px;
+    height:70px;
+    background:rgba(255,255,255,0);
+    margin:0 auto;
+}
+.nav>img{
+    margin-top: 20px;
+}
+.nav>.text{
+    height: 70px;
+    display: inline-block;
+    font-size: 25px;
+    line-height: 70px;
+    margin-left: 20px;
+    color:sandybrown;
+}
+.line{
+    display: inline-block;
+    width:2px;
+    height:30px;
+    background:#333;
+    margin-left: 20px;
+}
+.body{
+    width:100%;
+    height:524px;
+    background:#ddd;
+    background: url("foot_bg.jpg") center center no-repeat;
+}
+.login{
+    width:800px;
+    height:400px;
+    margin:auto;
+    margin-top:50px;
+}
+.my_table{
+    content:"";
+    display: table;
+}
+.login_box{
+    width:600px;
+    height:400px;
+    margin:0 auto;
+    background:rgba(240,230,140,0.3);
+}
+.login_box>p{
+    width:100%;
+    height:50px;
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+    color:deepskyblue;
+    font-family: "幼圆","宋体";
+}
+.inputbox{
+    height:20px;
+    width:400px;
+    margin-left: 50px;
+    margin-top:40px;
+
+}
+.input{
+    width:260px;
+    height:30px;
+    border:1px solid #0aa1ed;
+    padding-left: 20px;
+}
+.btnbox{
+    width:300px;
+    height:20px;
+    margin:70px auto;
+    margin-top:40px;
+}
+.btn{
+    width:80px;
+    height:30px;
+    background-image:linear-gradient(to top,#27b1f6 0%,#0ba1ed 100%);
+    border:0;
+    border-radius: 5px;
+}
+.text1{
+	font-size:12px;
+	text-align:center;
+	margin-left:-200px;
+}
+.text1>span>a{
+	color:#0aa1ed;
+	text-decoration:none;
+}
+
+.box{
+    width:35%;
+    margin:50px auto;
+    position: relative;
+}
+.list>li{
+    font-size: 12px;
+    display: block;
+    float: left;
+}
+.list>li>a{
+    text-decoration: none;
+    color: #aaa;
+    transition:all .5s;
+}
+.list>li>a:hover{
+    color:#EE9818;
+}
+.list>li>span{
+    color: #aaa;
+}
+.list>p{
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+}
